@@ -16,4 +16,4 @@ setupext-janitor==1.0.0
 bs4==0.0.1
 mock>=3.0.0
 Pillow>=9.3
-waitress==2.1.2
+waitress==3.0.1
