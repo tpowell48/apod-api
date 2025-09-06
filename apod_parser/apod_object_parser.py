@@ -41,12 +41,17 @@ def get_url(response):
     url = response['url']
     return url
 
-def download_image(url, date):
-    if os.path.isfile(f'{date}.png') == False:
-        raw_image = requests.get(url).content
-        with open(f'{date}.jpg', 'wb') as file:
-            file.write(raw_image)
-            
+def download_image(url, date, directory="."):
+    file_path = os.path.join(directory, f"{date}.jpg")
+    os.makedirs(directory, exist_ok=True)
+
+    if os.path.isfile(file_path) == False:
+        try:
+            raw_image = requests.get(url).content
+            with open(file_path, 'wb') as file:
+                file.write(raw_image)
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred while downloading the image: {e}")     
     else:
         return FileExistsError
 
